@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col">
+
+        <h2>Add Item</h2>
+        <form action="add_todo/" method="post" class="d-flex">
+            <input type="text" name="content" class="form-control mb-2 mr-sm-2" placeholder="Type here ....">
+            <button type="submit" class="btn btn-primary mb-2">Add</button>
+        </form>
+
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col">
+        <ul class="list-group">
+            {% for todo_item in todo_item%}
+                <li class="list-group-item">{{ todo_item.text }}
+                    <div class="float-right">
+                        <form action="delete_todo/{{todo_item.id}}/" method="post">
+                            <button type="submit" class="btn btn-danger btn-md ">✖️</button>
+                        </form>
+                    </div>
+                    <div class="float-right">
+                        <form action="complete_todo/{{ todo_item.id}}/" method="post">
+                            <button type="submit" class="btn btn-success btn-md mr-2 ">✔️</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor%}
+        </ul>
+
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col">
+        <h2>Completed Task</h2>
+        <ul class="list-group">
+            {% for complete_item in complete_item%}
+                <li class="list-group-item list-group-item-success">{{ complete_item.text }}
+                    <div class="float-right">
+                        <form action="delete_complete/{{complete_item.id}}/" method="post">
+                            <button type="submit" class="btn btn-danger btn-md ">✖️</button>
+                        </form>
+                </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+</div>
+
+
+{% endblock content %}
